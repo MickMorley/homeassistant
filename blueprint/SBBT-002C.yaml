@@ -51,8 +51,8 @@ trigger:
 # hold                        // > 3 sec hold
 
 action:
-- variables:
-    event: '{{ trigger }}'
+  - variables:
+      event: '{{ trigger }}'
   - choose:
       - conditions:
           - '{{ event == "1" }}'
