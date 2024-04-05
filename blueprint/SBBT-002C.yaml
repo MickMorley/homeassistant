@@ -55,14 +55,14 @@ action:
     event: '{{ trigger }}'
   - choose:
       - conditions:
-        - '{{ event == "1" }}'
+          - '{{ event == "1" }}'
         sequence: !input "button_single"
       - conditions:
-        - '{{ event == "2" }}'
+          - '{{ event == "2" }}'
         sequence: !input "button_double"
       - conditions:
-        - '{{ event == "3" }}'
+          - '{{ event == "3" }}'
         sequence: !input "button_triple" 
       - conditions:
-        - '{{ event == "4" }}'
+          - '{{ event == "4" }}'
         sequence: !input "button_hold"
