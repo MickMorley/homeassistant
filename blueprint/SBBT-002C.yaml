@@ -51,19 +51,20 @@ trigger:
 # hold                        // > 3 sec hold
 
 action:
-  - variables:
-      platform: "{{ trigger.platform }}"
-      payload:  "{% if trigger.to_state|default(false,true) %}{{ trigger.to_state.state }}{% else %}{{ trigger.payload }}{% endif %}"
   - choose:
       - conditions:
-          - "{{ state == '1'}}"
+        entity_id: !input shellyblu_button
+        state: "1"
         sequence: !input "button_single"
       - conditions:
-          - "{{ state == '2'}}"
+        entity_id: !input shellyblu_button
+        state: "2"
         sequence: !input "button_double"
       - conditions:
-          - "{{ state == '3'}}"
+        entity_id: !input shellyblu_button
+        state: "3"
         sequence: !input "button_triple" 
       - conditions:
-          - "{{ state == '4'}}"
+        entity_id: !input shellyblu_button
+        state: "4"
         sequence: !input "button_hold"
