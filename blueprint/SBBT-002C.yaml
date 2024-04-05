@@ -51,18 +51,18 @@ trigger:
 # hold                        // > 3 sec hold
 
 action:
-  - variables:
-      event: '{{ trigger }}'
-  - choose:
-      - conditions:
-          - '{{ event == "1" }}'
-        sequence: !input "button_single"
-      - conditions:
-          - '{{ event == "2" }}'
-        sequence: !input "button_double"
-      - conditions:
-          - '{{ event == "3" }}'
-        sequence: !input "button_triple" 
-      - conditions:
-          - '{{ event == "4" }}'
-        sequence: !input "button_hold"
+- variables:
+    event: '{{ trigger }}'
+- choose:
+  - conditions:
+      - '{{ event == "1" }}'
+    sequence: !input "button_single"
+  - conditions:
+      - '{{ event == "2" }}'
+    sequence: !input "button_double"
+  - conditions:
+      - '{{ event == "3" }}'
+    sequence: !input "button_triple" 
+  - conditions:
+      - '{{ event == "4" }}'
+    sequence: !input "button_hold"
