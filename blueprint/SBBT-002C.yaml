@@ -51,24 +51,18 @@ trigger:
 # hold                        // > 3 sec hold
 
 action:
+- variables:
+    event: '{{ trigger }}'
   - choose:
       - conditions:
-        - condition:
-          entity_id: !input shellyblu_button
-          state: "1"
+        - '{{ event == "1" }}'
         sequence: !input "button_single"
       - conditions:
-        - condition:
-          entity_id: !input shellyblu_button
-          state: "2"
+        - '{{ event == "2" }}'
         sequence: !input "button_double"
       - conditions:
-        - condition:
-          entity_id: !input shellyblu_button
-          state:  "3"
+        - '{{ event == "3" }}'
         sequence: !input "button_triple" 
       - conditions:
-        - condition:
-          entity_id: !input shellyblu_button
-          state:  "4"
+        - '{{ event == "4" }}'
         sequence: !input "button_hold"
