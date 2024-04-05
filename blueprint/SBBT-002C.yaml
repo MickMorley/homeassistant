@@ -1,7 +1,7 @@
 #2024-04-04 <mm> created
 blueprint:
   name: MQTT - SBBT-002C
-  description: ShellbyBLU Button
+  description: ShellbyBLU Button2
   domain: automation
   input:
     shellyblu_button:
