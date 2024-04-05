@@ -53,15 +53,17 @@ trigger:
 action:
 - variables:
     event: '{{ trigger }}'
+    payload: '{{ trigger.to_state.state }}'
+    paylad: '{{ trigger.to_state }}'
 - choose:
   - conditions:
       - '{{ event == "1" }}'
     sequence: !input "button_single"
   - conditions:
-      - '{{ event == "2" }}'
+      - '{{ payload == "2" }}'
     sequence: !input "button_double"
   - conditions:
-      - '{{ event == "3" }}'
+      - '{{ paylad == "3" }}'
     sequence: !input "button_triple" 
   - conditions:
       - '{{ event == "4" }}'
