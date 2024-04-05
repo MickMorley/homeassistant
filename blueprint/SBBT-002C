@@ -1,0 +1,83 @@
+#2024-04-04 <mm> created
+blueprint:
+  name: MQTT - SBBT-002C
+  description: ShellbyBLU Button1
+  domain: automation
+  input:
+    mqtt_entity:
+      description: The "friendly" SBBT-002C device name as is registered in mqtt
+      name: Name
+    base_topic:
+      description: The base topic as defined in the mqtt config
+      default: mqtt
+      name: Base Topic
+    state_entity:
+      name: State
+      selector:
+        entity:
+          domain: select
+          integration: mqtt
+          multiple: false
+
+    event_single:
+      name: Event | Single Press
+      description: Action to run on single press
+      default: []
+      selector:
+        action: {}
+    event_double:
+      name: Event | Double Press
+      description: Action to run on double press
+      default: []
+      selector:
+        action: {}
+    event_triple:
+      name: Event | Triple Press
+      description: Action to run on triple press
+      default: []
+      selector:
+        action: {}
+    event_hold:
+      name: Event | Hold Press
+      description: Action to run on hold press
+      default: []
+      selector:
+        action: {}
+
+mode: single
+max_exceeded: silent
+
+trigger_variables:
+  mqtt_entity: !input mqtt_entity
+  base_topic:  !input base_topic
+
+trigger:
+  - platform: mqtt
+    topic: "{{ base_topic  ~ '/' ~ mqtt_entity ~ '/action' }}"
+  - platform: state
+    entity_id: !input "state_entity"
+
+###### https://decoder.theengs.io/devices/SBBT-002C.html
+### Event
+# single
+# double
+# triple
+# hold                        // > 3 sec hold
+
+action:
+  - variables:
+      platform: "{{ trigger.platform }}"
+      payload:  "{% if trigger.to_state|default(false,true) %}{{ trigger.to_state.state }}{% else %}{{ trigger.payload }}{% endif %}"
+  - choose:
+      - conditions:
+          - "{{ platform == 'mqtt' and payload == 'single' }}"
+        sequence: !input "event_single"
+      - conditions:
+          - "{{ platform == 'mqtt' and payload == 'double' }}"
+        sequence: !input "event_double"
+      - conditions:
+          - "{{ platform == 'mqtt' and payload == 'triple' }}"
+        sequence: !input "event_triple" 
+      - conditions:
+          - "{{ platform == 'mqtt' and payload == 'hold' }}"
+        sequence: !input "event_hold"
