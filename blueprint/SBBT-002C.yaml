@@ -52,19 +52,19 @@ trigger:
 
 action:
 - variables:
-    event: '{{ trigger }}'
-    payload: '{{ trigger.to_state.state }}'
-    paylad: '{{ trigger.to_state }}'
+    event: "{{ trigger }}"
+    payload: "{{ trigger.to_state.state }}"
+    paylad: "{{ trigger.to_state }}"
 - choose:
   - conditions:
-      - '{{ event == "1" }}'
+      - "{{ event == '1' }}"
     sequence: !input "button_single"
   - conditions:
-      - '{{ payload == "2" }}'
+      - "{{ payload == '2' }}"
     sequence: !input "button_double"
   - conditions:
-      - '{{ paylad == "3" }}'
+      - "{{ paylad == '3' }}"
     sequence: !input "button_triple" 
   - conditions:
-      - '{{ event == "4" }}'
+      - "{{ event == '4' }}"
     sequence: !input "button_hold"
