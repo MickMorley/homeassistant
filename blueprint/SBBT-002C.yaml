@@ -53,18 +53,22 @@ trigger:
 action:
   - choose:
       - conditions:
-        entity_id: !input shellyblu_button
-        state: "1"
+        - condition:
+          entity_id: !input shellyblu_button
+          state: "1"
         sequence: !input "button_single"
       - conditions:
-        entity_id: !input shellyblu_button
-        state: "2"
+        - condition:
+          entity_id: !input shellyblu_button
+          state: "2"
         sequence: !input "button_double"
       - conditions:
-        entity_id: !input shellyblu_button
-        state: "3"
+        - condition:
+          entity_id: !input shellyblu_button
+          state:  "3"
         sequence: !input "button_triple" 
       - conditions:
-        entity_id: !input shellyblu_button
-        state: "4"
+        - condition:
+          entity_id: !input shellyblu_button
+          state:  "4"
         sequence: !input "button_hold"
